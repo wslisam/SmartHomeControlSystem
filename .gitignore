@@ -1,0 +1,15 @@
+
+*.bmp
+*.includecache
+*.o
+build/
+*.log
+
+
+.vscode
+# macOS Files
+.DS_Store
+clang.md
+*.png
+*.zip
+
