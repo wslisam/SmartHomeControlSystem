@@ -90,3 +90,67 @@ void SmartHome::setThermostatTemperature(int index, double temperature) {
         }
     }
 }
+
+void SmartHome::addSchedule(const Schedule& schedule) {
+    schedules.push_back(schedule);
+}
+
+void SmartHome::executeSchedules() {
+    for (auto& schedule : schedules) {
+        if (schedule.isTimeToExecute()) {
+            schedule.execute();
+        }
+    }
+}
+
+void SmartHome::displaySchedules() const {
+    std::cout << "Scheduled Actions:\n";
+    for (size_t i = 0; i < schedules.size(); ++i) {
+        std::cout << i << ". Next execution: " << schedules[i].getNextExecutionTime() << "\n";
+    }
+}
+
+void SmartHome::setEnergyRate(double rate) {
+    energyRate = rate;
+}
+
+void SmartHome::updateEnergyUsage() {
+    auto now = std::chrono::system_clock::now();
+    auto timeT = std::chrono::system_clock::to_time_t(now);
+    std::string date = std::string(std::ctime(&timeT)).substr(0, 10);
+    
+    double totalUsage = getTotalPowerConsumption() / 1000.0; // Convert to kWh
+    dailyEnergyUsage[date] += totalUsage;
+}
+
+void SmartHome::displayEnergyReport() const {
+    std::cout << "Energy Usage Report:\n";
+    double totalUsage = 0.0;
+    for (const auto& [date, usage] : dailyEnergyUsage) {
+        std::cout << date << ": " << usage << " kWh\n";
+        totalUsage += usage;
+    }
+    std::cout << "Total Usage: " << totalUsage << " kWh\n";
+    std::cout << "Estimated Cost: $" << totalUsage * energyRate << "\n";
+}
+
+void SmartHome::addNotification(const std::string& message) {
+    notifications.emplace(message);
+}
+
+void SmartHome::displayNotifications() {
+    std::cout << "Notifications:\n";
+    while (!notifications.empty()) {
+        const auto& notification = notifications.front();
+        std::cout << notification.getTimestamp() << ": " << notification.getMessage() << "\n";
+        notifications.pop();
+    }
+}
+
+void SmartHome::setUserPreference(const std::string& key, const std::string& value) {
+    userPreferences.setPreference(key, value);
+}
+
+void SmartHome::displayUserPreferences() const {
+    userPreferences.displayPreferences();
+}

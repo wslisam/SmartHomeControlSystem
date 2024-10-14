@@ -1,0 +1,32 @@
+// SmartSpeaker.cpp
+#include "SmartSpeaker.h"
+
+SmartSpeaker::SmartSpeaker(const std::string& name, double power)
+    : SmartDevice(name, power), volume(0), currentTrack("None") {}
+
+void SmartSpeaker::setVolume(int level) {
+    volume = std::max(0, std::min(100, level));
+    if (volume > 0) {
+        turnOn();
+    } else {
+        turnOff();
+    }
+}
+
+void SmartSpeaker::playTrack(const std::string& track) {
+    currentTrack = track;
+    turnOn();
+}
+
+int SmartSpeaker::getVolume() const {
+    return volume;
+}
+
+std::string SmartSpeaker::getCurrentTrack() const {
+    return currentTrack;
+}
+
+std::string SmartSpeaker::getStatus() const {
+    return SmartDevice::getStatus() + " (Volume: " + std::to_string(volume) + 
+           "%, Track: " + currentTrack + ")";
+}
