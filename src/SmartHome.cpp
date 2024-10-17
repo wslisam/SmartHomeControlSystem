@@ -1,13 +1,16 @@
 #include "SmartHome.h"
 #include <fstream>
+#include <sstream> 
 #include <iostream>
+#include <SmartThermostat.h>
+#include <SmartLight.h>
 
 void SmartHome::saveToFile(const std::string& filename) const {
     std::ofstream file(filename);
     if (file.is_open()) {
         for (const auto& device : devices) {
             file << device->getName() << "," 
-                 << (device->isDeviceOn() ? "1" : "0") << ","
+                //  << (device->getStatus() ? "1" : "0") << ","
                  << device->getPowerConsumption() << "\n";
         }
         file.close();

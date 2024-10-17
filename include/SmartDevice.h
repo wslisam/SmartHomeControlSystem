@@ -17,6 +17,9 @@ public:
     virtual void turnOff();
     virtual std::string getStatus() const;
     virtual double getPowerConsumption() const;
+    std::string getName() const {
+        return name;
+    }
 };
 
 #endif // SMARTDEVICE_H
