@@ -38,5 +38,6 @@ public:
     void displayNotifications();
     void setUserPreference(const std::string& key, const std::string& value);
     void displayUserPreferences() const;
+};
 
 #endif // SMARTHOME_H
