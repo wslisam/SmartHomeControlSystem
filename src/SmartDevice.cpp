@@ -15,6 +15,10 @@ std::string SmartDevice::getStatus() const {
     return name + " is " + (isOn ? "ON" : "OFF");
 }
 
+bool SmartDevice::getIsOn() const {
+    return isOn;
+}
+
 double SmartDevice::getPowerConsumption() const {
     return isOn ? powerConsumption : 0.0;
 }

@@ -157,3 +157,21 @@ void SmartHome::setUserPreference(const std::string& key, const std::string& val
 void SmartHome::displayUserPreferences() const {
     userPreferences.displayPreferences();
 }
+
+int SmartHome::findDeviceIndex(const std::string& deviceId) const {
+    for (size_t i = 0; i < devices.size(); ++i) {
+        if (devices[i]->getName() == deviceId) {
+            return i; // Return the index if device name matches
+        }
+    }
+
+    return -1; // Return -1 if device with specified name is not found
+}
+
+bool SmartHome::getDeviceStatus(int index) const {
+    if (index >= 0 && static_cast<size_t>(index) < devices.size()) {
+        return devices[index]->getIsOn(); // Assuming SmartDevice has an isOn() function
+    }
+    
+    return false; // Return false if index is out of range or device doesn't exist
+}

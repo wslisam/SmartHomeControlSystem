@@ -18,6 +18,7 @@ private:
     double energyRate; // Cost per kWh
     std::queue<Notification> notifications;
     UserPreferences userPreferences;
+    
 
 public:
     void addDevice(std::unique_ptr<SmartDevice> device);
@@ -38,6 +39,8 @@ public:
     void displayNotifications();
     void setUserPreference(const std::string& key, const std::string& value);
     void displayUserPreferences() const;
+    int findDeviceIndex(const std::string& deviceId) const;
+    bool getDeviceStatus(int index) const;
 };
 
 #endif // SMARTHOME_H

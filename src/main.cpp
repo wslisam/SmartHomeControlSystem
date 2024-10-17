@@ -5,7 +5,9 @@
 #include "SmartLight.h"
 #include "SmartThermostat.h"
 #include "VoiceControl.h"
-
+#include "sstream"
+#include <ctime>
+#include <iomanip>
 
 void displayMenu() {
     std::cout << "\nSmart Home Control System\n";
